@@ -1,11 +1,11 @@
 #!/bin/bash
  
 # Linuxの資源について調査するbashスクリプト
-# 調査結果を./outputOfCheck.txtに出力する
+# 調査結果を./outputThreads.txtに出力する
 # 参考: https://yunabe.jp/docs/maximum_number_of_threads.html
 
 # 出力ファイル名の定義
-output="./outputOfCheck.txt"
+output="./configThreads.txt"
 # 出力ファイルの生成
 touch $output
 
