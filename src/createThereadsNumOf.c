@@ -6,14 +6,14 @@
 void *threadFunc (void *arg)
 {
   int a = 0;
-  for (int i = 0; i < 1000000; i++) {
+  for (int i = 0; i < 100; i++) {
     a += (2 * a + i * 32 ) / 3;
   }
 }
 
 int main (int argc, char * argv)
 {
-  const int NumOfThreads = 252;
+  const int NumOfThreads = 230;
   pthread_t threads[NumOfThreads];
   
   for (int i = 0; i < NumOfThreads; i ++) {
