@@ -13,12 +13,18 @@ void *threadFunc (void *arg)
 
 int main (int argc, char * argv)
 {
-  const int NumOfThreads = 230;
+  const int NumOfThreads = 252;
   pthread_t threads[NumOfThreads];
+  int errCode = 0;
   
   for (int i = 0; i < NumOfThreads; i ++) {
-    if (pthread_create(&threads[i], NULL, threadFunc, NULL) != 0) {
+    if ((errCode = pthread_create(&threads[i], NULL, threadFunc, NULL)) != 0) {
       printf("Error: Failed to create thread # = %d\n", i);
+      switch (errCode) {
+      case EAGAIN: printf("Error: EAGAIN\n");
+	break;
+      default: printf("Error: OTHER\n");
+      }
       exit(1);
     }
   }
