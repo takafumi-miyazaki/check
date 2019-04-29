@@ -3,4 +3,4 @@
 all:
 
 thread.exe:
-	gcc createThreads.c -lpthread
+	gcc -o threads.exe createThreads.c -lpthread
