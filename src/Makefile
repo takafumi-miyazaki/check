@@ -14,6 +14,10 @@ manpthreadcreate.exe: manpthreadcreate.c
 	gcc -o manpthreadcreate.exe manpthreadcreate.c -lpthread
 manpthreadcreateDebug.exe: manpthreadcreate.c
 	gcc -o manpthreadcreateDebug.exe manpthreadcreate.c -lpthread -g -fstack-usage
+stackSizeTest.exe: stackSizeTest.c
+	gcc -o stackSizeTest.exe stackSizeTest.c -lpthread
+stackStizeTestDebug.exe: stackSizeTest.c
+	gcc -o stackSizeTestDebug.exe stackSizeTest.c -lpthread -g
 clean:
 	rm -f *~
 	rm -f *.exe

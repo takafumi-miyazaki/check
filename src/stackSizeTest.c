@@ -4,40 +4,37 @@
 #include <stdlib.h>
 #include <errno.h>
 
-/*
-void *threadFuncDynamicArray (void *arg)
-{
-  int sizeDynamic = 1000000;
-  int numDynamic[sizeDynamic];
-  for (int i = 0; i < 100000; i++) {
-    numDynamic[i] = i; //dynamicな配列を生成
-  }
-}
-*/
+#define SIZE 10000000
 
 void *threadFuncStaticArray (void *arg)
 {
-  int numStatic[1000];
-  for (int i = 0; i < 1000; i++) {
+  const int NumOfArray = SIZE;
+  int numStatic[NumOfArray];
+  for (int i = 0; i < NumOfArray; i++) {
     numStatic[i] = i;
   }
 }
 
-/*
-void *threadFuncSmallCalc (void *arg)
-{
-  int a = 0;
-  for (int i = 0; i < 1000000; i++) {
-    a += (2 * a + i * 32 ) / 3;
-  }
-}
-*/
-
 int main (int argc, char * argv)
 {
-  const int NumOfThreads = 100000;
-  pthread_t threads[NumOfThreads];
+  int NumOfThreads = 1;
+  pthread_t thread[NumOfThreads];
+  pthread_attr_t attr;
   int errCode = 0;
+  
+  pthread_attr_init(&attr);
+  for (int i = 0; i < NumOfThreads; i++) { 
+    if (errCode = pthread_attr_setstacksize(&attr, SIZE*sizeof(int)+100000) != 0) {
+      printf("Error: Failed to set stack size\n");
+      exit(1);
+      switch (errCode) {
+      case EINVAL: printf("Error: ENIVAL\n");
+	break;
+      default: printf("Error: OTHER\n");
+      }
+      exit(1);
+    }
+  }
   
   for (int i = 0; i < NumOfThreads; i ++) {
     if ((errCode = pthread_create(&threads[i], NULL, threadFuncStaticArray, NULL)) != 0) {
