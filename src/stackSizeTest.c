@@ -4,27 +4,27 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#define SIZE 10000000
+#define SIZE 259000
 
 void *threadFuncStaticArray (void *arg)
 {
-  const int NumOfArray = SIZE;
-  int numStatic[NumOfArray];
-  for (int i = 0; i < NumOfArray; i++) {
-    numStatic[i] = i;
+  //const int NumOfArray = SIZE;
+  int numStatic[SIZE];
+  for (int i = 0; i < SIZE; i++) {
+    numStatic[i] = i*2 - i/2;
   }
 }
 
 int main (int argc, char * argv)
 {
-  int NumOfThreads = 1;
-  pthread_t thread[NumOfThreads];
+  //  int NumOfThreads = 1;
+  pthread_t threads[1];
   pthread_attr_t attr;
   int errCode = 0;
   
   pthread_attr_init(&attr);
-  for (int i = 0; i < NumOfThreads; i++) { 
-    if (errCode = pthread_attr_setstacksize(&attr, SIZE*sizeof(int)+100000) != 0) {
+  for (int i = 0; i < 1; i++) { 
+    if (errCode = pthread_attr_setstacksize(&attr, SIZE*sizeof(int) * 10000000) != 0) {
       printf("Error: Failed to set stack size\n");
       exit(1);
       switch (errCode) {
@@ -36,7 +36,7 @@ int main (int argc, char * argv)
     }
   }
   
-  for (int i = 0; i < NumOfThreads; i ++) {
+  for (int i = 0; i < 1; i ++) {
     if ((errCode = pthread_create(&threads[i], NULL, threadFuncStaticArray, NULL)) != 0) {
       printf("Error: Failed to create thread # = %d\n", i);
       switch (errCode) {
@@ -47,7 +47,7 @@ int main (int argc, char * argv)
       exit(1);
     }
   }
-  for (int i = 0; i < NumOfThreads; i ++) {
+  for (int i = 0; i < 1; i ++) {
     if (pthread_join(threads[i], NULL) != 0) {
       printf("Error: Failed to join thread # = %d\n", i);
       exit(1);
