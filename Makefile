@@ -1,3 +1,3 @@
 clean:
-	rm *~
-	rm *.txt
+	rm -rf *~
+	rm -rf *.txt
