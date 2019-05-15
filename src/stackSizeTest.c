@@ -15,7 +15,7 @@ void *threadFuncStaticArray (void *arg)
   }
 }
 
-int main (int argc, char * argv)
+int main (int argc, char * argv[])
 {
   //  int NumOfThreads = 1;
   pthread_t threads[1];
@@ -47,6 +47,7 @@ int main (int argc, char * argv)
       exit(1);
     }
   }
+  
   for (int i = 0; i < 1; i ++) {
     if (pthread_join(threads[i], NULL) != 0) {
       printf("Error: Failed to join thread # = %d\n", i);
